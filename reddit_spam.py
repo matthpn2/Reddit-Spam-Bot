@@ -28,7 +28,7 @@ if __name__ == "__main__":
         spam_content = []
         spam_users = {}
 
-        suspicious_authors = find_spam_by_name("udemy")
+        suspicious_authors = find_spam_by_name(search_query)
         for author in suspicious_authors:
             spam_urls = []
             submission_count = 0
