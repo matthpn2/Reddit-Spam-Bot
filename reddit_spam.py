@@ -4,23 +4,21 @@ import time
 common_spam = ["udemy", "course", "save", "coupon", "free", "discount"]
 
 # setup credentials and create an authorized Reddit instance
-reddit = praw.Reddit(client_id = "client_id",
-                     client_secret = "client_secret",
-                     user_agent = "user_agent",
-                     username = "username",
-                     password = "password")
+reddit = praw.Reddit(client_id="client_id",
+                     client_secret="client_secret",
+                     user_agent="user_agent",
+                     username="username",
+                     password="password")
 
 def find_spam_by_name(search_query):
     '''
         Find and return a list of Reddit authors with submission posts matching the search query.
     '''
     authors = []
-    for submission in reddit.subreddit("all").search(search_query, sort = "new", limit = 50):
+    for submission in reddit.subreddit("all").search(search_query, sort="new", limit=50):
         print(f"Title: {submission.title}\n Author: {submission.author}\n URL: {submission.url}\n")
-
         if submission.author not in authors:
             authors.append(submission.author)
-
     return authors
 
 if __name__ == "__main__":
@@ -28,7 +26,7 @@ if __name__ == "__main__":
         spam_content = []
         spam_users = {}
 
-        suspicious_authors = find_spam_by_name(search_query)
+        suspicious_authors = find_spam_by_name("search_query")
         for author in suspicious_authors:
             spam_urls = []
             submission_count = 0
@@ -78,7 +76,7 @@ if __name__ == "__main__":
             spam_id = spam[0]
             spam_user = spam[2]
 
-            submission = reddit.submission(id = spam_id)
+            submission = reddit.submission(id=spam_id)
             created_at = submission.created_utc
             tagged_spam = False
 
